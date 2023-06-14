@@ -1,16 +1,17 @@
 # hakkason1
 
-A new Flutter project.
+## Usage
 
-## Getting Started
+### riverpod and freezed
+```bash
+flutter pub run build_runner build
+```
+## Install
 
-This project is a starting point for a Flutter application.
+### VOICEVOX
 
-A few resources to get you started if this is your first Flutter project:
+VOICEVOXのインストール
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. [公式サイト](https://voicevox.hiroshiba.jp/)からダウンロードし、インストールを行う
+2. 規約に同意した状態で、VOICEVOXを起動
+3. [ドキュメント](http://localhost:50021/docs)が開けばOK
