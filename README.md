@@ -1,5 +1,11 @@
 # hakkason1
 
+## Usage
+
+### riverpod and freezed
+```bash
+flutter pub run build_runner build
+```
 ## Install
 
 ### VOICEVOX
