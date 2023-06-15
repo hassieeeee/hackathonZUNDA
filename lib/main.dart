@@ -80,7 +80,7 @@ class MyHomePage extends ConsumerWidget {
           String title = apiServiceProvider[0].title;
           String des = apiServiceProvider[0].description ?? '';
           await gptChatsNotifier.systemInput(
-              'ニュースのタイトルは$titleで内容は$desです。相手はニュースについて何も知りません。これから会話形式で少しずつニュースの内容を、友達と話すように話題提供してください。それでは始めてください。');
+              'ニュースのタイトルは$titleで内容は$desです。相手はニュースについて何も知りません。これから会話形式で少しずつニュースの内容を、友達と話すように話題提供してください。短い文章でこたえてください。');
           // await gptChatsNotifier.Start();
           // print('gptchat : ${gptChatsProvider.length}');
           // if (gptChatsProvider.length != 1) {
