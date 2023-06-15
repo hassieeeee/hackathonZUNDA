@@ -51,6 +51,7 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
+    final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
 
     return Scaffold(
       body: UIWidget(),
@@ -72,13 +73,7 @@ class MyHomePage extends ConsumerWidget {
 
           final speechTextsNotifier =
               ref.read(speechTextsNotifierProvider.notifier);
-          final speechTextsProvider = ref.read(speechTextsNotifierProvider);
 
-          ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
-                SpeechText(
-                  content: "dfas",
-                ),
-              );
           // var audio =
           //     await vv.textToAudioClip(speechTextsProvider.last.content);
           print(speechTextsProvider);

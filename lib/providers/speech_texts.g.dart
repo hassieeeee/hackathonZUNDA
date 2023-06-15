@@ -7,12 +7,12 @@ part of 'speech_texts.dart';
 // **************************************************************************
 
 String _$speechTextsNotifierHash() =>
-    r'8df9743366d66cd71911128f860c99a3c4e4262a';
+    r'1544b189a87ade2be44e741dfe9a21b5bab7ea12';
 
 /// See also [SpeechTextsNotifier].
 @ProviderFor(SpeechTextsNotifier)
 final speechTextsNotifierProvider =
-    AutoDisposeNotifierProvider<SpeechTextsNotifier, SpeechText>.internal(
+    AutoDisposeNotifierProvider<SpeechTextsNotifier, List<SpeechText>>.internal(
   SpeechTextsNotifier.new,
   name: r'speechTextsNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,5 +22,5 @@ final speechTextsNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$SpeechTextsNotifier = AutoDisposeNotifier<SpeechText>;
+typedef _$SpeechTextsNotifier = AutoDisposeNotifier<List<SpeechText>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

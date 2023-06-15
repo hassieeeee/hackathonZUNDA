@@ -52,11 +52,13 @@ class _SpeechMicState extends ConsumerState<SpeechMic> {
     setState(() {
       _lastWords = result.recognizedWords;
     });
-    ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
-          SpeechText(
-            content: result.recognizedWords,
-          ),
-        );
+    if (result.finalResult) {
+      ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
+            SpeechText(
+              content: result.recognizedWords,
+            ),
+          );
+    }
     // ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
     //       SpeechText(
     //         content: "dfafdfjfldfkdlfjkd",
