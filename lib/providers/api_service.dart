@@ -10,7 +10,7 @@ part 'api_service.g.dart';
 @Riverpod(keepAlive: true)
 class ApiServiceNotifier extends _$ApiServiceNotifier {
   // state
-
+  @override
   List<Article> build() {
     return List.empty();
   }
