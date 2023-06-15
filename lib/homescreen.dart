@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/speech_mic.dart';
 
+import 'providers/api_service.dart';
+
 class UIWidget extends ConsumerWidget {
   String weathercode = '快晴';
   var now = DateTime.now();
@@ -61,6 +63,7 @@ class UIWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(

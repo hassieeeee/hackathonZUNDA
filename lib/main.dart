@@ -59,24 +59,21 @@ class MyHomePage extends ConsumerWidget {
         onPressed: () async {
           final apiServiceNotifier =
               ref.read(apiServiceNotifierProvider.notifier);
-          //apiServiceNotifier.getArticle();
-          // print("happy turn");
-          // var apidata;
-          // apiServiceNotifier.addArticle(apidata);
-          // print(apidata[0]);
+          await apiServiceNotifier.getArticle();
+          await Future.delayed(Duration(milliseconds: 1000));
+
+          final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
+
+          print(apiServiceProvider);
           final gptChatsNotifier = ref.read(gptChatsNotifierProvider.notifier);
-          // await gptChatsNotifier.userInput('こんにちは');
+          String title = apiServiceProvider[0].title;
+          String des = apiServiceProvider[0].description ?? '';
+          await gptChatsNotifier.systemInput('ニュースのタイトルは$titleで内容は$desです');
+          await gptChatsNotifier.Start();
+          await vv.textToAudioClip(gptChatsProvider.last.content);
+          //print(audio.lengthInBytes);
 
-          final gptChatsProvider = ref.read(gptChatsNotifierProvider);
-          // var audio = await vv.textToAudioClip(gptChatsProvider.last.content);
-          // print(audio.lengthInBytes);
-
-          final speechTextsNotifier =
-              ref.read(speechTextsNotifierProvider.notifier);
-
-          // var audio =
-          //     await vv.textToAudioClip(speechTextsProvider.last.content);
-          print(speechTextsProvider);
+          //print(speechTextsProvider);
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
