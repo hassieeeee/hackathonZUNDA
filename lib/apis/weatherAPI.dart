@@ -6,54 +6,8 @@ import 'package:geolocator/geolocator.dart';
 
 import 'dart:developer';
 
-
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   double lat = 0.0;
   double lon = 0.0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
 
   // デバイスの現在位置を決定する。
 // 位置情報サービスが有効でない場合、または許可されていない場合。
@@ -91,20 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // デバイスの位置情報を返す。
     final position = await Geolocator.getCurrentPosition();
 
-    setState(() {
-      lat = position.latitude;
-      lon = position.longitude;
-    });
-    log('$lat');
-    log('$lon');
-
-
-
     return position;
   }
 
-  void get() async {
-    await _determinePosition();
+  Future<String> get() async {
+    final position = await _determinePosition();
+    final lat = position.latitude;
+    final lon = position.longitude;
 
     const domain = 'https://api.open-meteo.com/v1/forecast?';
     var query = 'latitude=$lat&longitude=$lon&hourly=precipitation_probability,weathercode&forecast_days=1';
@@ -129,39 +76,5 @@ class _MyHomePageState extends State<MyHomePage> {
     else if(weathercode <= 99)  weatherCode = '雷雨';  // 95 : Thunderstorm Slight Or Moderate ・ 96, 99 : Thunderstorm With Slight And Heavy Hail
     String voice = 'おはよう,今日の天気は${weatherCode}だよ!降水確率は${chance_of_rain}%なのだ!';
     log('${voice}');
+    return voice;
   }
-//
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            //  Text(
-            //    lat.toString(),
-            //  ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: get,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
