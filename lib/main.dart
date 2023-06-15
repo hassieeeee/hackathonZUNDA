@@ -60,18 +60,22 @@ class MyHomePage extends ConsumerWidget {
           final apiServiceNotifier =
               ref.read(apiServiceNotifierProvider.notifier);
           await apiServiceNotifier.getArticle();
-          await Future.delayed(Duration(milliseconds: 1000));
 
-          final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
+          final apiServiceProvider = ref.watch(apiServiceNotifierProvider); // バグだろ
+          final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
 
           print(apiServiceProvider);
           final gptChatsNotifier = ref.read(gptChatsNotifierProvider.notifier);
           String title = apiServiceProvider[0].title;
           String des = apiServiceProvider[0].description ?? '';
-          await gptChatsNotifier.systemInput('ニュースのタイトルは$titleで内容は$desです');
-          await gptChatsNotifier.Start();
-          await vv.textToAudioClip(gptChatsProvider.last.content);
-          //print(audio.lengthInBytes);
+          await gptChatsNotifier.systemInput('ニュースのタイトルは$titleで内容は$desです。相手はニュースについて何も知りません。これから会話形式で少しずつニュースの内容を、友達と話すように話題提供してください。それでは始めてください。');
+          // await gptChatsNotifier.Start();
+          print('gptchat : ${gptChatsProvider.length}');
+          if (gptChatsProvider.length != 1) {
+            var audio = await vv.textToAudioClip(gptChatsProvider.last.content);
+            print(audio.lengthInBytes);
+
+          }
 
           //print(speechTextsProvider);
         },

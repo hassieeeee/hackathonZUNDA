@@ -70,7 +70,7 @@ class GptChatsNotifier extends _$GptChatsNotifier {
   Future<void> systemInput(String x) async{
     addChat(GPTChat(role: 'system', content: x));
     await sendToChatGPT();
-    state.removeLast();
+    // state.removeLast();
   }
 
   Future<void> userInput(String x) async{
@@ -79,7 +79,7 @@ class GptChatsNotifier extends _$GptChatsNotifier {
   }
 
   Future<void> Start() async{
-    addChat(GPTChat(role: 'system', content: 'Please provide a topic regarding the news you have entered.'));
+    addChat(GPTChat(role: 'system', content: ''));
     await sendToChatGPT();
   }
 
