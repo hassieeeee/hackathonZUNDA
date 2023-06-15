@@ -7,7 +7,7 @@ import 'providers/api_service.dart';
 import './models/article_model.dart';
 import 'package:flutter/services.dart';
 import 'homescreen.dart';
-
+import 'models/speech_text.dart';
 import 'providers/speech_texts.dart';
 
 void main() async {
@@ -73,10 +73,14 @@ class MyHomePage extends ConsumerWidget {
           final speechTextsNotifier =
               ref.read(speechTextsNotifierProvider.notifier);
           final speechTextsProvider = ref.read(speechTextsNotifierProvider);
-          await speechTextsNotifier.toggleListening();
+
+          ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
+                SpeechText(
+                  content: "dfas",
+                ),
+              );
           // var audio =
           //     await vv.textToAudioClip(speechTextsProvider.last.content);
-          print(speechTextsProvider.length);
           print(speechTextsProvider);
         },
         tooltip: 'Increment',

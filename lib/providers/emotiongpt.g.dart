@@ -7,7 +7,7 @@ part of 'emotiongpt.dart';
 // **************************************************************************
 
 String _$emotiongptNotifierHash() =>
-    r'aea20b4ff688b520cb6a88c23eb056f0027ecfca';
+    r'838c92bcc34544437e9a41e9b87ef890bebf81be';
 
 /// See also [EmotiongptNotifier].
 @ProviderFor(EmotiongptNotifier)

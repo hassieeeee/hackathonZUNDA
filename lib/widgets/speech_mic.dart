@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import '../providers/speech_texts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../models/speech_text.dart';
 
-class SpeechMic extends StatefulWidget {
+class SpeechMic extends ConsumerStatefulWidget {
   SpeechMic({Key? key}) : super(key: key);
 
   @override
   _SpeechMicState createState() => _SpeechMicState();
 }
 
-class _SpeechMicState extends State<SpeechMic> {
-  SpeechToText _speechToText = SpeechToText();
+class _SpeechMicState extends ConsumerState<SpeechMic> {
+  final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
 
@@ -45,9 +48,20 @@ class _SpeechMicState extends State<SpeechMic> {
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
     debugPrint(result.recognizedWords);
+
     setState(() {
       _lastWords = result.recognizedWords;
     });
+    ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
+          SpeechText(
+            content: result.recognizedWords,
+          ),
+        );
+    // ref.read(speechTextsNotifierProvider.notifier).addSpeechText(
+    //       SpeechText(
+    //         content: "dfafdfjfldfkdlfjkd",
+    //       ),
+    //     );
   }
 
   @override
