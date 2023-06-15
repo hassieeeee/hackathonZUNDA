@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/speech_mic.dart';
 
 import 'providers/api_service.dart';
+import 'providers/gpt_chats.dart';
 
 class UIWidget extends ConsumerWidget {
   String weathercode = '快晴';
@@ -63,7 +64,7 @@ class UIWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
+    final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -110,7 +111,7 @@ class UIWidget extends ConsumerWidget {
         height: 200.0,
         child: Center(
           child: Text(
-           'ドカ食い気絶とは、大量の食べ物を一気に食べてしまい、その量や濃さに圧倒されて気を失うことを指す表現なのだ。言葉通り、「ドカ食い」は大量に食べることを意味し、「気絶」は意識を失うことを表します。つまり、食べ物の美味しさや興奮に夢中になりすぎて、驚くべき量を食べてしまい、その結果気を失ってしまう状態なのだ。ただし、実際に気絶することは体にとっては危険ですので、食べる量やペースには注意が必要なのだよ。安全に美味しい食事を楽しむことが大切なのだ！'    ,
+            gptChatsProvider.last.content,
             style: TextStyle(
               color: Colors.lightGreen,
               fontSize: 25,
