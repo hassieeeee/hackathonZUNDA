@@ -8,6 +8,12 @@ flutter pub run build_runner build
 ```
 ## Install
 
+### .env
+
+1. `.env.example`ファイルをコピーし、`.env`ファイルに改名する
+2. 各APIキーを入力する
+
+
 ### VOICEVOX
 
 VOICEVOXのインストール
