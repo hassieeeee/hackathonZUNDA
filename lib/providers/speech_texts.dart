@@ -4,7 +4,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 part 'speech_texts.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SpeechTextsNotifier extends _$SpeechTextsNotifier {
   @override
   List<SpeechText> build() {

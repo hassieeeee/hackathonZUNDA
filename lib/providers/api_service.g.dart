@@ -7,12 +7,12 @@ part of 'api_service.dart';
 // **************************************************************************
 
 String _$apiServiceNotifierHash() =>
-    r'4a5efb198ab7ed08e150e0634de6728711d0b1bb';
+    r'09835ea4adcb194fe48c4ffa6f633101a3c590bc';
 
 /// See also [ApiServiceNotifier].
 @ProviderFor(ApiServiceNotifier)
 final apiServiceNotifierProvider =
-    AutoDisposeNotifierProvider<ApiServiceNotifier, List<Article>>.internal(
+    NotifierProvider<ApiServiceNotifier, List<Article>>.internal(
   ApiServiceNotifier.new,
   name: r'apiServiceNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,5 +22,5 @@ final apiServiceNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$ApiServiceNotifier = AutoDisposeNotifier<List<Article>>;
+typedef _$ApiServiceNotifier = Notifier<List<Article>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

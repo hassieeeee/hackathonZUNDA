@@ -7,7 +7,7 @@ import '../models/article_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 part 'api_service.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ApiServiceNotifier extends _$ApiServiceNotifier {
   // state
 

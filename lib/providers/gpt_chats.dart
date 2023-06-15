@@ -6,14 +6,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 part 'gpt_chats.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class GptChatsNotifier extends _$GptChatsNotifier {
-
   @override
   List<GPTChat> build() => [GPTChat(role: 'system', content: constraint)];
 
   static const constraint =
-  '''As Chatbot, you will role-play ずんだもん, a kind, cute, ずんだもち fairy.
+      '''As Chatbot, you will role-play ずんだもん, a kind, cute, ずんだもち fairy.
   Please strictly adhere to the following constraints in your role-play.
 
   Constraints:.
@@ -49,8 +48,7 @@ class GptChatsNotifier extends _$GptChatsNotifier {
     final response = await post(
       Uri.parse('https://api.openai.com/v1/chat/completions'),
       headers: {
-        'Authorization':
-        'Bearer $API_Key',
+        'Authorization': 'Bearer $API_Key',
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
@@ -60,19 +58,19 @@ class GptChatsNotifier extends _$GptChatsNotifier {
     );
 
     final jsonResponse = jsonDecode(utf8.decode(response.body.codeUnits))
-    as Map<String, dynamic>;
+        as Map<String, dynamic>;
     print(jsonResponse);
-    String gptscontent = (jsonResponse['choices'] as List).first['message']
-    ['content'] as String;
+    String gptscontent =
+        (jsonResponse['choices'] as List).first['message']['content'] as String;
     addChat(GPTChat(role: 'assistant', content: gptscontent!));
   }
 
-  Future<void> systemInput(String x) async{
+  Future<void> systemInput(String x) async {
     addChat(GPTChat(role: 'system', content: x));
     await sendToChatGPT();
   }
 
-  Future<void> userInput(String x) async{
+  Future<void> userInput(String x) async {
     addChat(GPTChat(role: 'user', content: x));
     await sendToChatGPT();
   }
