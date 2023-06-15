@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 import '../models/GPTChat.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 part 'gpt_chats.g.dart';
 
@@ -44,11 +45,12 @@ class GptChatsNotifier extends _$GptChatsNotifier {
   ''';
 
   Future<void> sendToChatGPT() async {
+    var API_Key = dotenv.env['OPENAI_API_KEY'];
     final response = await post(
       Uri.parse('https://api.openai.com/v1/chat/completions'),
       headers: {
         'Authorization':
-        'Bearer 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',
+        'Bearer $API_Key',
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
@@ -65,14 +67,14 @@ class GptChatsNotifier extends _$GptChatsNotifier {
     addChat(GPTChat(role: 'assistant', content: gptscontent!));
   }
 
-  void systemInput(String x) {
+  Future<void> systemInput(String x) async{
     addChat(GPTChat(role: 'system', content: x));
-    sendToChatGPT();
+    await sendToChatGPT();
   }
 
-  void userInput(String x) {
+  Future<void> userInput(String x) async{
     addChat(GPTChat(role: 'user', content: x));
-    sendToChatGPT();
+    await sendToChatGPT();
   }
 
   void addChat(GPTChat chat) {

@@ -61,14 +61,14 @@ class MyHomePage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final apiServiceNotifier = ref.read(apiServiceNotifierProvider.notifier);
-          apiServiceNotifier.getArticle();
+          //apiServiceNotifier.getArticle();
           // print("happy turn");
           // var apidata;
           // apiServiceNotifier.addArticle(apidata);
           // print(apidata[0]);
           final gptChatsNotifier = ref.read(gptChatsNotifierProvider.notifier);
-          // gptChatsNotifier
-          //     .addChat(const GptChat(chatText: 'こんにちずんずん　ずんだめんなのだ'));
+          await gptChatsNotifier.userInput('こんにちは');
+
           final gptChatsProvider = ref.read(gptChatsNotifierProvider);
           var audio = await vv.textToAudioClip(gptChatsProvider.last.content);
           print(audio.lengthInBytes);
