@@ -78,3 +78,32 @@ import 'dart:developer';
     log('${voice}');
     return voice;
   }
+
+  Future<String> get_weathercode() async{
+    final position = await _determinePosition();
+    final lat = position.latitude;
+    final lon = position.longitude;
+    const domain = 'https://api.open-meteo.com/v1/forecast?';
+    var query = 'latitude=$lat&longitude=$lon&hourly=precipitation_probability,weathercode&forecast_days=1';
+
+    var url = Uri.parse(domain + query);
+    debugPrint('url: $url');
+    var response = await http.get(url);
+    Map<String, dynamic> map = jsonDecode(response.body);
+    int weathercode = map['hourly']['weathercode'][13]; //13時の天気コードを取り出す
+    var weatherCode;
+
+    if(weathercode == 0) weatherCode = '快晴';  // 0 : Clear Sky
+    else if(weathercode == 1) weatherCode = '晴れ';  // 1 : Mainly Clear
+    else if(weathercode == 2) weatherCode = '一部曇';  // 2 : Partly Cloudy
+    else if(weathercode == 3) weatherCode = '曇り';  // 3 : Overcast
+    else if(weathercode <= 49) weatherCode = '霧';  // 45, 48 : Fog And Depositing Rime Fog
+    else if(weathercode <= 59) weatherCode = '霧雨';  // 51, 53, 55 : Drizzle Light, Moderate And Dense Intensity ・ 56, 57 : Freezing Drizzle Light And Dense Intensity
+    else if(weathercode <= 69) weatherCode = '雨';  // 61, 63, 65 : Rain Slight, Moderate And Heavy Intensity ・66, 67 : Freezing Rain Light And Heavy Intensity
+    else if(weathercode <= 79) weatherCode = '雪';  // 71, 73, 75 : Snow Fall Slight, Moderate And Heavy Intensity ・ 77 : Snow Grains
+    else if(weathercode <= 84)  weatherCode = '俄か雨';  // 80, 81, 82 : Rain Showers Slight, Moderate And Violent
+    else if(weathercode <= 94) weatherCode = '雪・雹';  // 85, 86 : Snow Showers Slight And Heavy
+    else if(weathercode <= 99)  weatherCode = '雷雨';  // 95 : Thunderstorm Slight Or Moderate ・ 96, 99 : Thunderstorm With Slight And Heavy Hail
+
+    return weatherCode;
+  }
