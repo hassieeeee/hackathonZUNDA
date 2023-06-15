@@ -86,7 +86,7 @@ class UIWidget extends ConsumerWidget {
         width: 600.0,
         height: 600.0,
         child: Image.asset(
-          'images/hukidashi5.png',
+          'images/hukidashi10.png',
           fit: BoxFit.contain,
         ),
       ),
@@ -96,35 +96,40 @@ class UIWidget extends ConsumerWidget {
         width: 450.0,
         height: 450.0,
         child: Image.asset(
-          'images/hukidashi6.png',
+          'images/hukidashi11.png',
           fit: BoxFit.contain,
         ),
       ),
       Positioned(
         left: 290.0,
-        top: 25.0,
+        top: 1.0,
         width: 580.0,
-        height: 450.0,
-        child: Text(
-          'ぼく、ずんだもんの好きな食べ物はずんだなのだ！ずんだは抹茶と枝豆で作られるお菓子なんだよ。ふんわりとした食感と甘さが特徴で、とっても美味しいんだ！',
-          style: TextStyle(
-            color: Colors.lightGreen,
-            fontSize: 25,
-            fontFamily: 'Yusei_Magic',
+        height: 200.0,
+        child: Center(
+          child: Text(
+           'ドカ食い気絶とは、大量の食べ物を一気に食べてしまい、その量や濃さに圧倒されて気を失うことを指す表現なのだ。言葉通り、「ドカ食い」は大量に食べることを意味し、「気絶」は意識を失うことを表します。つまり、食べ物の美味しさや興奮に夢中になりすぎて、驚くべき量を食べてしまい、その結果気を失ってしまう状態なのだ。ただし、実際に気絶することは体にとっては危険ですので、食べる量やペースには注意が必要なのだよ。安全に美味しい食事を楽しむことが大切なのだ！'    ,
+            style: TextStyle(
+              color: Colors.lightGreen,
+              fontSize: 25,
+              fontFamily: 'Yusei_Magic',
+            ),
           ),
         ),
       ),
       Positioned(
         left: 290.0,
-        top: 280.0,
+        top: 260.0,
         width: 440.0,
-        height: 400.0,
-        child: Text(
-          '${now.hour}',
-          style: TextStyle(
-            color: Colors.lightGreen,
-            fontSize: 25,
-            fontFamily: 'Yusei_Magic',
+       // height: 400.0,
+        height: 150.0,
+        child: Center(
+          child: Text(
+            'ぼく、ごんぞうラーメンは大好きなんだなのだ！',
+            style: TextStyle(
+              color: Colors.lightGreen,
+              fontSize: 25,
+              fontFamily: 'Yusei_Magic',
+            ),
           ),
         ),
       ),
