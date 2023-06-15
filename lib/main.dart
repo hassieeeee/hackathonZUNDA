@@ -8,6 +8,8 @@ import './models/article_model.dart';
 import 'package:flutter/services.dart';
 import 'homescreen.dart';
 
+import 'providers/speech_texts.dart';
+
 void main() async {
   await dotenv.load(fileName: ".env");
 
@@ -16,10 +18,8 @@ void main() async {
       child: MyApp(),
     ),
   );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight
-  ]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +46,6 @@ class MyHomePage extends ConsumerWidget {
   int code = 0;
   String weathercode = '雷雨';
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
@@ -56,7 +55,8 @@ class MyHomePage extends ConsumerWidget {
       body: UIWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final apiServiceNotifier = ref.read(apiServiceNotifierProvider.notifier);
+          final apiServiceNotifier =
+              ref.read(apiServiceNotifierProvider.notifier);
           //apiServiceNotifier.getArticle();
           // print("happy turn");
           // var apidata;
@@ -68,6 +68,15 @@ class MyHomePage extends ConsumerWidget {
           final gptChatsProvider = ref.read(gptChatsNotifierProvider);
           // var audio = await vv.textToAudioClip(gptChatsProvider.last.content);
           // print(audio.lengthInBytes);
+
+          final speechTextsNotifier =
+              ref.read(speechTextsNotifierProvider.notifier);
+          final speechTextsProvider = ref.read(speechTextsNotifierProvider);
+          await speechTextsNotifier.toggleListening();
+          // var audio =
+          //     await vv.textToAudioClip(speechTextsProvider.last.content);
+          print(speechTextsProvider.length);
+          print(speechTextsProvider);
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

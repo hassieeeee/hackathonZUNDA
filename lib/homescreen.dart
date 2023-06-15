@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'widgets/speech_mic.dart';
 
 class UIWidget extends ConsumerWidget {
   String weathercode = '快晴';
   var now = DateTime.now();
 
-  String get_Haikei(int x){
-    if(x==0){
+  String get_Haikei(int x) {
+    if (x == 0) {
       return 'images/haikei.jpg';
-    }
-    else {
+    } else {
       return 'images/haikei.jpg';
     }
   }
 
-  String get_zunda(String y){
-    switch(y){
+  String get_zunda(String y) {
+    switch (y) {
       case '快晴':
         return 'images/zunda00.png';
       case '晴れ':
@@ -44,17 +44,23 @@ class UIWidget extends ConsumerWidget {
     }
   }
 
-  String change_back(int z){
-    if(z <= 5) return 'images/haikei4.jpg';
-    else if(z < 5 && z <= 8) return 'images/haikei2.jpg';
-    else if(8 < z || z <= 16) return 'images/haikei.jpg';
-    else if(16 < z && z <= 18) return 'images/haikei2.jpg';
-    else if(18 < z && z <= 23) return 'images/haikei3.jpg';
-    else return 'images/haikei.jpg';
+  String change_back(int z) {
+    if (z <= 5)
+      return 'images/haikei4.jpg';
+    else if (z < 5 && z <= 8)
+      return 'images/haikei2.jpg';
+    else if (8 < z || z <= 16)
+      return 'images/haikei.jpg';
+    else if (16 < z && z <= 18)
+      return 'images/haikei2.jpg';
+    else if (18 < z && z <= 23)
+      return 'images/haikei3.jpg';
+    else
+      return 'images/haikei.jpg';
   }
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -95,16 +101,6 @@ class UIWidget extends ConsumerWidget {
         ),
       ),
       Positioned(
-        left: 770.0,
-        top: 340.0,
-        width: 60.0,
-        height: 60.0,
-        child: Image.asset(
-          'images/mic1.png',
-          fit: BoxFit.contain,
-        ),
-      ),
-      Positioned(
         left: 290.0,
         top: 25.0,
         width: 580.0,
@@ -131,6 +127,13 @@ class UIWidget extends ConsumerWidget {
             fontFamily: 'Yusei_Magic',
           ),
         ),
+      ),
+      Positioned(
+        left: 770.0,
+        top: 340.0,
+        width: 60.0,
+        height: 60.0,
+        child: SpeechMic(),
       ),
     ]);
   }
