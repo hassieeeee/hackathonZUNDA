@@ -6,7 +6,7 @@ part of 'gpt_chats.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gptChatsNotifierHash() => r'f64f00c70444b07e6584231eea132f42a8cd526f';
+String _$gptChatsNotifierHash() => r'a093c5cda49dc0d9d34b2c97788c8faf6295b2a9';
 
 /// See also [GptChatsNotifier].
 @ProviderFor(GptChatsNotifier)
