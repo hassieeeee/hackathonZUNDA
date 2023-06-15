@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UIWidget extends ConsumerWidget {
   String weathercode = '快晴';
+  var now = DateTime.now();
 
   String get_Haikei(int x){
     if(x==0){
@@ -43,6 +44,15 @@ class UIWidget extends ConsumerWidget {
     }
   }
 
+  String change_back(int z){
+    if(z <= 5) return 'images/haikei4.jpg';
+    else if(z < 5 && z <= 8) return 'images/haikei2.jpg';
+    else if(8 < z || z <= 16) return 'images/haikei.jpg';
+    else if(16 < z && z <= 18) return 'images/haikei2.jpg';
+    else if(18 < z && z <= 23) return 'images/haikei3.jpg';
+    else return 'images/haikei.jpg';
+  }
+
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return Stack(children: <Widget>[
@@ -50,7 +60,7 @@ class UIWidget extends ConsumerWidget {
         decoration: BoxDecoration(
             image: DecorationImage(
 // image: AssetImage('images/haikei.jpg'),
-          image: AssetImage('images/haikei.jpg'),
+          image: AssetImage(change_back(now.hour)),
           fit: BoxFit.cover,
         )),
       ),
@@ -114,7 +124,7 @@ class UIWidget extends ConsumerWidget {
         width: 440.0,
         height: 400.0,
         child: Text(
-          'ずんだもんの好きな食べ物はなに？教えてくれないかな？ちなみに僕の好きな食べ物はごんぞうラーメンだよ!',
+          '${now.hour}',
           style: TextStyle(
             color: Colors.lightGreen,
             fontSize: 25,
