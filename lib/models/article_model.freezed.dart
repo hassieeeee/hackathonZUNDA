@@ -19,7 +19,7 @@ mixin _$Article {
   Source get source => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String? get urlToImage => throw _privateConstructorUsedError;
   String get publishedAt => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $ArticleCopyWith<$Res> {
       {Source source,
       String? author,
       String title,
-      String description,
+      String? description,
       String url,
       String? urlToImage,
       String publishedAt,
@@ -63,7 +63,7 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
     Object? source = null,
     Object? author = freezed,
     Object? title = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? url = null,
     Object? urlToImage = freezed,
     Object? publishedAt = null,
@@ -82,10 +82,10 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$$_ArticleCopyWith<$Res> implements $ArticleCopyWith<$Res> {
       {Source source,
       String? author,
       String title,
-      String description,
+      String? description,
       String url,
       String? urlToImage,
       String publishedAt,
@@ -148,7 +148,7 @@ class __$$_ArticleCopyWithImpl<$Res>
     Object? source = null,
     Object? author = freezed,
     Object? title = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? url = null,
     Object? urlToImage = freezed,
     Object? publishedAt = null,
@@ -167,10 +167,10 @@ class __$$_ArticleCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -211,7 +211,7 @@ class _$_Article implements _Article {
   @override
   final String title;
   @override
-  final String description;
+  final String? description;
   @override
   final String url;
   @override
@@ -260,7 +260,7 @@ abstract class _Article implements Article {
       {required final Source source,
       required final String? author,
       required final String title,
-      required final String description,
+      required final String? description,
       required final String url,
       required final String? urlToImage,
       required final String publishedAt,
@@ -273,7 +273,7 @@ abstract class _Article implements Article {
   @override
   String get title;
   @override
-  String get description;
+  String? get description;
   @override
   String get url;
   @override

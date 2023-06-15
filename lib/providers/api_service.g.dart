@@ -7,7 +7,7 @@ part of 'api_service.dart';
 // **************************************************************************
 
 String _$apiServiceNotifierHash() =>
-    r'7884bd34c2692970c880556b30c3410d941df0ba';
+    r'1b8942f70e10cff6185f66f3952f3411ade0a7ba';
 
 /// See also [ApiServiceNotifier].
 @ProviderFor(ApiServiceNotifier)

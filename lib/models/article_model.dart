@@ -8,7 +8,7 @@ class Article with _$Article {
     required Source source,
     required String? author,
     required String title,
-    required String description,
+    required String? description,
     required String url,
     required String? urlToImage,
     required String publishedAt,

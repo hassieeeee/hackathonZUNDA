@@ -15,7 +15,7 @@ class ApiServiceNotifier extends _$ApiServiceNotifier {
 
   Future<List<Article>> getArticle() async {
 
-    var API_Key = DotEnv().env['NEWSAPI_KEY'];
+    var API_Key = dotenv.env['NEWSAPI_KEY'];
     var url = 'https://newsapi.org/v2/top-headlines';
     var sql = '?country=jp&apiKey=$API_Key';
     var Url = Uri.parse(url + sql);
@@ -24,7 +24,6 @@ class ApiServiceNotifier extends _$ApiServiceNotifier {
     print('Response body: ${response.body}');
     Map<String, dynamic> json = jsonDecode(response.body);
     List<dynamic> body = json['articles'];
-    print("hello");
     List<Article> articles = body.map((dynamic item) => Article.fromJson(item)).toList();
 
     return articles;

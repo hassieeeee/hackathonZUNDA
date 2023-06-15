@@ -8,7 +8,8 @@ import 'providers/api_service.dart';
 import './models/article_model.dart';
 
 void main() async {
-  await DotEnv().load(fileName: "assets/.env");
+  await dotenv.load(fileName: ".env");
+
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -41,6 +42,7 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
+    final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,6 +61,12 @@ class MyHomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          final apiServiceNotifier = ref.read(apiServiceNotifierProvider.notifier);
+          apiServiceNotifier.getArticle();
+          // print("happy turn");
+          // var apidata;
+          // apiServiceNotifier.addArticle(apidata);
+          // print(apidata[0]);
           final gptChatsNotifier = ref.read(gptChatsNotifierProvider.notifier);
           gptChatsNotifier
               .addChat(const GptChat(chatText: 'こんにちずんずん　ずんだめんなのだ'));
