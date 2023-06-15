@@ -3,7 +3,6 @@ import './apis/voicevox.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'providers/gpt_chats.dart';
-import './models/gpt_chat.dart';
 import 'providers/api_service.dart';
 import './models/article_model.dart';
 
@@ -54,7 +53,7 @@ class MyHomePage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Column(
-              children: gptChatsProvider.map((e) => Text(e.chatText)).toList(),
+              children: gptChatsProvider.map((e) => Text(e.content)).toList(),
             ),
           ],
         ),
@@ -68,10 +67,10 @@ class MyHomePage extends ConsumerWidget {
           // apiServiceNotifier.addArticle(apidata);
           // print(apidata[0]);
           final gptChatsNotifier = ref.read(gptChatsNotifierProvider.notifier);
-          gptChatsNotifier
-              .addChat(const GptChat(chatText: 'こんにちずんずん　ずんだめんなのだ'));
+          // gptChatsNotifier
+          //     .addChat(const GptChat(chatText: 'こんにちずんずん　ずんだめんなのだ'));
           final gptChatsProvider = ref.read(gptChatsNotifierProvider);
-          var audio = await vv.textToAudioClip(gptChatsProvider.last.chatText);
+          var audio = await vv.textToAudioClip(gptChatsProvider.last.content);
           print(audio.lengthInBytes);
         },
         tooltip: 'Increment',
