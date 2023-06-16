@@ -81,25 +81,25 @@ class UIWidget extends ConsumerWidget {
       return 'images/haikei.jpg';
   }
 
-  Image changeImage(int i) {
-    if(i==0) {
-      return Image.asset(
-        get_otenki_zunda(weathercode),
-        fit: BoxFit.contain,
-      );
-    }else {
-      return Image.asset(
-        get_emo_zunda(i),
-        fit: BoxFit.contain,
-      );
-    }
-  }
+  // Image changeImage(int i) {
+  //   if(i==0) {
+  //     return Image.asset(
+  //       get_otenki_zunda(weathercode),
+  //       fit: BoxFit.contain,
+  //     );
+  //   }else {
+  //     return Image.asset(
+  //       get_emo_zunda(i),
+  //       fit: BoxFit.contain,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
-    final emotiongptProvider = ref.watch(emotiongptNotifierProvider);
+    // final emotiongptProvider = ref.watch(emotiongptNotifierProvider);
 
     double size_w = MediaQuery.of(context).size.width;
     double size_h = MediaQuery.of(context).size.height;
@@ -117,7 +117,10 @@ class UIWidget extends ConsumerWidget {
         top: size_h * 0.01,
         width: size_w * 0.35,
         height: size_h * 1.2,
-        // child: changeImage(ref.watch(emotiongptNotifierProvider)),
+        child: Image.asset(
+          'images/zunda00.png',
+          fit: BoxFit.contain,
+        ),
       ),
       Positioned(
         left: size_w * 0.3,
