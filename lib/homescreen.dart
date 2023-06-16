@@ -49,6 +49,23 @@ class UIWidget extends ConsumerWidget {
     }
   }
 
+  String get_emo_zunda(int y) {
+    switch (y) {
+      case 1:
+        return 'images/zunda01.png';
+      case 2:
+        return 'images/zunda02.png';
+      case 3:
+        return 'images/zunda03.png';
+      case 4:
+        return 'images/zunda04.png';
+      case 5:
+        return 'images/zunda05.png';
+      default:
+        return 'miss';
+    }
+  }
+
   String change_back(int z) {
     if (z <= 5)
       return 'images/haikei4.jpg';
@@ -64,10 +81,26 @@ class UIWidget extends ConsumerWidget {
       return 'images/haikei.jpg';
   }
 
+  Image changeImage(int i) {
+    if(i==0) {
+      return Image.asset(
+        get_otenki_zunda(weathercode),
+        fit: BoxFit.contain,
+      );
+    }else {
+      return Image.asset(
+        get_emo_zunda(i),
+        fit: BoxFit.contain,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
+    final emotiongptProvider = ref.watch(emotiongptNotifierProvider);
+
     double size_w = MediaQuery.of(context).size.width;
     double size_h = MediaQuery.of(context).size.height;
     return Stack(children: <Widget>[
@@ -79,15 +112,12 @@ class UIWidget extends ConsumerWidget {
           fit: BoxFit.cover,
         )),
       ),
-      Positioned(
+      Positioned( // 条件によってずんだもんのエモーションが変わるパーツ
         left: size_w * 0.0001,
         top: size_h * 0.01,
         width: size_w * 0.35,
         height: size_h * 1.2,
-        child: Image.asset(
-          get_zunda(weathercode),
-          fit: BoxFit.contain,
-        ),
+        // child: changeImage(ref.watch(emotiongptNotifierProvider)),
       ),
       Positioned(
         left: size_w * 0.3,
