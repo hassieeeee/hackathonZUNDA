@@ -4,13 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'providers/gpt_chats.dart';
 import 'providers/api_service.dart';
-import './models/article_model.dart';
 import 'package:flutter/services.dart';
 import 'homescreen.dart';
-import 'models/speech_text.dart';
 import 'providers/speech_texts.dart';
-import 'models/GPTChat.dart';
-import 'apis/weatherAPI.dart';
+import '../providers/zundamon_text.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -51,6 +48,7 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final zundamonProvider = ref.watch(zundamonTextNotifierProvider);
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     final apiServiceProvider = ref.watch(apiServiceNotifierProvider);
     final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
@@ -64,41 +62,35 @@ class MyHomePage extends ConsumerWidget {
       }
     });
 
+    Widget button = zundamonProvider.when(loading: () {
+      return const CircularProgressIndicator();
+    }, error: (err, stack) {
+      return Text('Error: $err');
+    }, data: ((weatherData) {
+      return Column(
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              return await ref
+                  .read(zundamonTextNotifierProvider.notifier)
+                  .nextNews();
+            },
+            tooltip: 'Increment',
+            child: const Icon(Icons.newspaper),
+          ),
+          Text(gptChatsProvider.length.toString(),
+              style: const TextStyle(fontSize: 0)),
+          Text(apiServiceProvider.length.toString(),
+              style: const TextStyle(fontSize: 0)),
+          Text(speechTextsProvider.length.toString(),
+              style: const TextStyle(fontSize: 0)),
+        ],
+      );
+    }));
+
     return Scaffold(
       body: UIWidget(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-
-          final String aisatu = await get();
-          ref.read(gptChatsNotifierProvider.notifier).addAssistant(aisatu);
-          await Future.delayed(Duration(milliseconds: 3000));
-
-          final apiServiceNotifier =
-              ref.read(apiServiceNotifierProvider.notifier);
-          await apiServiceNotifier.getArticle();
-
-          final apiServiceProvider =
-              ref.watch(apiServiceNotifierProvider); // バグだろ
-          final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
-
-          print(apiServiceProvider);
-          final gptChatsNotifier = ref.read(gptChatsNotifierProvider.notifier);
-          String title = apiServiceProvider[0].title;
-          String des = apiServiceProvider[0].description ?? '';
-          await gptChatsNotifier.systemInput(
-              'ニュースのタイトルは$titleで内容は$desです。相手はニュースについて何も知りません。これから会話形式で少しずつニュースの内容を、友達と話すように話題提供してください。短い文章でこたえてください。');
-          // await gptChatsNotifier.Start();
-          // print('gptchat : ${gptChatsProvider.length}');
-          // if (gptChatsProvider.length != 1) {
-          //   var audio = await vv.textToAudioClip(gptChatsProvider.last.content);
-          //   print(audio.lengthInBytes);
-          // }
-
-          //print(speechTextsProvider);
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: button,
     );
   }
 }
