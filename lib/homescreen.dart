@@ -71,7 +71,7 @@ class UIWidget extends ConsumerWidget {
       return 'images/haikei4.jpg';
     else if (z < 5 && z <= 8)
       return 'images/haikei2.jpg';
-    else if (8 < z || z <= 16)
+    else if (8 < z && z <= 16)
       return 'images/haikei.jpg';
     else if (16 < z && z <= 18)
       return 'images/haikei2.jpg';
