@@ -64,7 +64,9 @@ class GptChatsNotifier extends _$GptChatsNotifier {
     //print(jsonResponse);
     String gptscontent = (jsonResponse['choices'] as List).first['message']
     ['content'] as String;
-    addChat(GPTChat(role: 'assistant', content: gptscontent!));
+    if(state.last.role != 'system') {
+      addChat(GPTChat(role: 'assistant', content: gptscontent!));
+    }
   }
 
   Future<void> systemInput(String x) async{
@@ -83,7 +85,7 @@ class GptChatsNotifier extends _$GptChatsNotifier {
     await sendToChatGPT();
   }
 
-  void addAssistant(String x){
+  void addAssistant(String x){//ここに入れたセリフはずんだもんが読む
     addChat(GPTChat(role: 'assistant', content: x));
   }
 
