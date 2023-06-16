@@ -52,6 +52,7 @@ import 'dart:developer';
     final position = await _determinePosition();
     final lat = position.latitude;
     final lon = position.longitude;
+    DateTime today = DateTime.now();
 
     const domain = 'https://api.open-meteo.com/v1/forecast?';
     var query = 'latitude=$lat&longitude=$lon&hourly=precipitation_probability,weathercode&forecast_days=1';
@@ -74,7 +75,7 @@ import 'dart:developer';
     else if(weathercode <= 84)  weatherCode = '俄か雨';  // 80, 81, 82 : Rain Showers Slight, Moderate And Violent
     else if(weathercode <= 94) weatherCode = '雪・雹';  // 85, 86 : Snow Showers Slight And Heavy
     else if(weathercode <= 99)  weatherCode = '雷雨';  // 95 : Thunderstorm Slight Or Moderate ・ 96, 99 : Thunderstorm With Slight And Heavy Hail
-    String voice = 'おはよう,今日の天気は${weatherCode}だよ!降水確率は${chance_of_rain}%なのだ!';
+    String voice = 'よお！今日は${today.month}月'+'${today.day}日'+'日月火水木金土'[today.weekday]+'曜日,今日の天気は${weatherCode}だよ!降水確率は${chance_of_rain}%なのだ!';
     log('${voice}');
     return voice;
   }
