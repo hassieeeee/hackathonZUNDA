@@ -11,7 +11,7 @@ class EmotiongptNotifier extends _$EmotiongptNotifier {
   @override
   List<GPTChat> build() => [GPTChat(role: 'system', content: constraint)];
 
-  int emotion = 3;
+  int emotion = 0;
 
   static const constraint = '''
   You, as a chatbot, must strictly follow the conditions that follow.
@@ -39,10 +39,11 @@ class EmotiongptNotifier extends _$EmotiongptNotifier {
         ['content'] as String);
   }
 
-  Future<void> emotionTextInput(String x) async {
+  Future<int> emotionTextInput(String x) async {
     addChat(GPTChat(role: 'user', content: x));
     await sendToChatGPT();
     state.removeLast();
+    return emotion;
   }
 
   void addChat(GPTChat chat) {
