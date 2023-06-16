@@ -17,4 +17,12 @@ class SpeechTextsNotifier extends _$SpeechTextsNotifier {
     state = [...state, data];
     print('state: ${state.length}');
   }
+
+  String getLastSpeech(){
+    if(state.length-1>=0) {
+      return state[state.length-1].content;
+    }else {
+      return '';
+    }
+  }
 }

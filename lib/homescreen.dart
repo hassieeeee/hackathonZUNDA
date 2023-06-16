@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakkason1/models/speech_text.dart';
+import 'package:hakkason1/providers/speech_texts.dart';
 import 'widgets/speech_mic.dart';
 
 import 'providers/api_service.dart';
@@ -65,6 +67,7 @@ class UIWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
+    final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -127,7 +130,8 @@ class UIWidget extends ConsumerWidget {
         height: 150.0,
         child: Center(
           child: Text(
-            'ぼく、ごんぞうラーメンは大好きなんだなのだ！',
+            // 'ぼく、ごんぞうラーメンは大好きなんだなのだ！',
+            ref.read(speechTextsNotifierProvider.notifier).getLastSpeech(),
             style: TextStyle(
               color: Colors.lightGreen,
               fontSize: 25,

@@ -7,7 +7,7 @@ part of 'speech_texts.dart';
 // **************************************************************************
 
 String _$speechTextsNotifierHash() =>
-    r'd8e104389f7f988835e7bfbdf4a34fa294b9511a';
+    r'9eeaf53d2498e557707d2d83042e2746cdd6821e';
 
 /// See also [SpeechTextsNotifier].
 @ProviderFor(SpeechTextsNotifier)

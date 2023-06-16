@@ -4,6 +4,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 import '../providers/speech_texts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/speech_text.dart';
+import '../providers/gpt_chats.dart';
 
 class SpeechMic extends ConsumerStatefulWidget {
   SpeechMic({Key? key}) : super(key: key);
@@ -66,18 +67,29 @@ class _SpeechMicState extends ConsumerState<SpeechMic> {
     //     );
   }
 
+  void sendToChatGPT () {
+    String x = ref.read(speechTextsNotifierProvider.notifier).getLastSpeech();
+    ref.read(gptChatsNotifierProvider.notifier).userInput(x);
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.listen(speechTextsNotifierProvider, (prev, newChats) {
+      sendToChatGPT();
+    });
+
     return ElevatedButton(
       onPressed:
-          // If not yet listening for speech start, otherwise stop
+      //   // If not yet listening for speech start, otherwise stop
           _speechToText.isNotListening ? _startListening : _stopListening,
-      child: Column(
-        children: [
-          Text(_lastWords),
-          Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
-        ],
-      ),
+
+      // child: Column(
+      //   children: [
+      //     Text(_lastWords),
+      //     Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
+      //   ],
+      // ),
+      child: Center(child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic)),
     );
   }
 }
