@@ -68,6 +68,8 @@ class UIWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
+    double size_w = MediaQuery.of(context).size.width;
+    double size_h = MediaQuery.of(context).size.height;
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -78,40 +80,40 @@ class UIWidget extends ConsumerWidget {
         )),
       ),
       Positioned(
-        left: -110.0,
-        top: 30.0,
-        width: 500.0,
-        height: 500.0,
+        left: size_w * 0.0001,
+        top: size_h * 0.01,
+        width: size_w * 0.35,
+        height: size_h * 1.2,
         child: Image.asset(
           get_zunda(weathercode),
           fit: BoxFit.contain,
         ),
       ),
       Positioned(
-        left: 280.0,
-        top: -170.0,
-        width: 600.0,
-        height: 600.0,
+        left: size_w * 0.3,
+        top: size_h * 0.001,
+        width: size_w * 0.6,
+        height: size_h * 0.6,
         child: Image.asset(
           'images/hukidashi10.png',
           fit: BoxFit.contain,
         ),
       ),
       Positioned(
-        left: 280.0,
-        top: 110.0,
-        width: 450.0,
-        height: 450.0,
+        left: size_w * 0.3,
+        top: size_h * 0.5,
+        width: size_w * 0.55,
+        height: size_h * 0.55,
         child: Image.asset(
           'images/hukidashi11.png',
           fit: BoxFit.contain,
         ),
       ),
       Positioned(
-        left: 290.0,
-        top: 1.0,
-        width: 580.0,
-        height: 200.0,
+        left: size_w * 0.31,
+        top: size_h * 0.0001,
+        width: size_w * 0.6,
+        height: size_h * 0.5,
         child: Center(
           child: Text(
             ref.read(gptChatsNotifierProvider.notifier).getLastZundamon(),
@@ -124,10 +126,10 @@ class UIWidget extends ConsumerWidget {
         ),
       ),
       Positioned(
-        left: 290.0,
-        top: 260.0,
-        width: 440.0,
-        height: 150.0,
+        left: size_w * 0.31,
+        top: size_h * 0.6,
+        width: size_w * 0.55,
+        height: size_h * 0.4,
         child: Center(
           child: Text(
             // 'ぼく、ごんぞうラーメンは大好きなんだなのだ！',
@@ -141,10 +143,10 @@ class UIWidget extends ConsumerWidget {
         ),
       ),
       Positioned(
-        left: 770.0,
-        top: 340.0,
-        width: 60.0,
-        height: 60.0,
+        left: size_w * 0.88,
+        top: size_h * 0.62,
+        width: size_w * 0.14,
+        height: size_h * 0.14,
         child: SpeechMic(),
       ),
     ]);
