@@ -2,11 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class VoiceVoxConnection {
-  // final String _voiceVoxUrl = 'http://127.0.0.1:50021';
-  // final String _voiceVoxUrl = 'http://10.0.2.2:50021';
-  final String _voiceVoxUrl = 'http://10.30.95.114:50021';
+  final _voiceVoxUrl = dotenv.env['VOICEVOX_URL'];
   final int _speaker;
 
   VoiceVoxConnection(this._speaker);
