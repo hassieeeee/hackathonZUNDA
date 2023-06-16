@@ -111,7 +111,7 @@ class UIWidget extends ConsumerWidget {
         height: 200.0,
         child: Center(
           child: Text(
-            gptChatsProvider.last.content,
+            ref.read(gptChatsNotifierProvider.notifier).getLastZundamon(),
             style: TextStyle(
               color: Colors.lightGreen,
               fontSize: 25,

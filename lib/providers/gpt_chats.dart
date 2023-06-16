@@ -83,6 +83,22 @@ class GptChatsNotifier extends _$GptChatsNotifier {
     await sendToChatGPT();
   }
 
+  void addAssistant(String x){
+    addChat(GPTChat(role: 'assistant', content: x));
+  }
+
+  String getLastZundamon(){ //最後のずんだもんのセリフを取得する
+    String x = '';
+    for(int i=state.length-1; i>=0; i--){
+      if(state[i].role == 'assistant'){
+        x = state[i].content;
+        break;
+      }
+    }
+    return x;
+  }
+
+
   void addChat(GPTChat chat) {
     state = [...state, chat];
   }
