@@ -92,8 +92,8 @@ class UIWidget extends ConsumerWidget {
       Positioned(
         left: size_w * 0.3,
         top: size_h * 0.001,
-        width: size_w * 0.6,
-        height: size_h * 0.6,
+        width: size_w * 0.63,
+        height: size_h * 0.63,
         child: Image.asset(
           'images/hukidashi10.png',
           fit: BoxFit.contain,
@@ -101,7 +101,7 @@ class UIWidget extends ConsumerWidget {
       ),
       Positioned(
         left: size_w * 0.3,
-        top: size_h * 0.5,
+        top: size_h * 0.52,
         width: size_w * 0.55,
         height: size_h * 0.55,
         child: Image.asset(
