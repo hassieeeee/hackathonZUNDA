@@ -10,6 +10,7 @@ import 'homescreen.dart';
 import 'models/speech_text.dart';
 import 'providers/speech_texts.dart';
 import 'models/GPTChat.dart';
+import 'apis/weatherAPI.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -67,6 +68,11 @@ class MyHomePage extends ConsumerWidget {
       body: UIWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+
+          final String aisatu = await get();
+          ref.read(gptChatsNotifierProvider.notifier).addAssistant(aisatu);
+          await Future.delayed(Duration(milliseconds: 3000));
+
           final apiServiceNotifier =
               ref.read(apiServiceNotifierProvider.notifier);
           await apiServiceNotifier.getArticle();
