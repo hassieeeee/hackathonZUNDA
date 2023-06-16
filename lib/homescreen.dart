@@ -124,7 +124,6 @@ class UIWidget extends ConsumerWidget {
         left: 290.0,
         top: 260.0,
         width: 440.0,
-       // height: 400.0,
         height: 150.0,
         child: Center(
           child: Text(
