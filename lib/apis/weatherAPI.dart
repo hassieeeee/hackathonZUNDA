@@ -93,7 +93,7 @@ Future<String> get() async {
   else if (weathercode <= 99)
     weatherCode =
         '雷雨'; // 95 : Thunderstorm Slight Or Moderate ・ 96, 99 : Thunderstorm With Slight And Heavy Hail
-  String voice = 'よお！今日は${today.month}月' +
+  String voice = '今日は${today.month}月' +
       '${today.day}日' +
       '日月火水木金土'[today.weekday] +
       '曜日,今日の天気は${weatherCode}だよ!降水確率は${chance_of_rain}%なのだ!';

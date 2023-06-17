@@ -116,6 +116,8 @@ class UIWidget extends ConsumerWidget {
 
     double size_w = MediaQuery.of(context).size.width;
     double size_h = MediaQuery.of(context).size.height;
+
+    final lastZundamonText  = ref.watch(gptChatsNotifierProvider.notifier).getLastZundamon();
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -170,10 +172,10 @@ class UIWidget extends ConsumerWidget {
         height: size_h * 0.5,
         child: Center(
           child: Text(
-            ref.read(gptChatsNotifierProvider.notifier).getLastZundamon(),
+            lastZundamonText,
             style: TextStyle(
               color: Colors.lightGreen,
-              fontSize: 25,
+              fontSize: lastZundamonText.length >= 40 ? 20 : 25,
               fontFamily: 'Yusei_Magic',
             ),
           ),
@@ -186,7 +188,6 @@ class UIWidget extends ConsumerWidget {
         height: size_h * 0.4,
         child: Center(
           child: Text(
-            // 'ぼく、ごんぞうラーメンは大好きなんだなのだ！',
             ref.read(speechTextsNotifierProvider.notifier).getLastSpeech(),
             style: TextStyle(
               color: Colors.lightGreen,
