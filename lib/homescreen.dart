@@ -8,6 +8,7 @@ import 'widgets/speech_mic.dart';
 import 'providers/api_service.dart';
 import 'providers/gpt_chats.dart';
 import 'providers/emotiongpt.dart';
+import 'providers/emotion.dart';
 
 class UIWidget extends ConsumerWidget {
   String weathercode = '快晴';
@@ -52,16 +53,17 @@ class UIWidget extends ConsumerWidget {
 
   String get_emo_zunda(int y) {
     switch (y) {
+      // Joy
       case 1:
-        return 'images/zunda01.png';
-      case 2:
-        return 'images/zunda02.png';
-      case 3:
-        return 'images/zunda03.png';
-      case 4:
-        return 'images/zunda04.png';
-      case 5:
+        return 'images/zunda00.png';
+      case 2: // Sad
+        return 'images/zunda06.png';
+      case 3: // Angry
         return 'images/zunda05.png';
+      case 4:
+        return 'images/zunda09.png';
+      case 5:
+        return 'images/zunda07.png';
       default:
         return 'miss';
     }
@@ -100,14 +102,14 @@ class UIWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gptChatsProvider = ref.watch(gptChatsNotifierProvider);
     final speechTextsProvider = ref.watch(speechTextsNotifierProvider);
-    // final emotiongptProvider = ref.watch(emotiongptNotifierProvider);
-    var emotion = 0;
+    final emotionProvider = ref.watch(emotionNotifierProvider);
+    
 
     ref.listen(gptChatsNotifierProvider, (prev, newChats) async {
       if (newChats.length != 1) {
         if (newChats.last.role == 'assistant') {
           String x = newChats.last.content;
-          emotion = await ref
+          await ref
               .read(emotiongptNotifierProvider.notifier)
               .emotionTextInput(x);
         }
@@ -143,7 +145,7 @@ class UIWidget extends ConsumerWidget {
         top: size_h * 0.01,
         width: size_w * 0.35,
         height: size_h * 1.2,
-        child: changeImage(emotion),
+        child: changeImage(emotionProvider),
       ),
       Positioned(
         left: size_w * 0.3,

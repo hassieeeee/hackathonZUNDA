@@ -1,25 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gpt_chats.dart';
+part of 'emotion.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gptChatsNotifierHash() => r'6d2a5289d974dd5be36cb92ff67294265f37c1e8';
+String _$emotionNotifierHash() => r'2c7d63f2720b3dccb78ef7466abd26ea63df6bea';
 
-/// See also [GptChatsNotifier].
-@ProviderFor(GptChatsNotifier)
-final gptChatsNotifierProvider =
-    NotifierProvider<GptChatsNotifier, List<GPTChat>>.internal(
-  GptChatsNotifier.new,
-  name: r'gptChatsNotifierProvider',
+/// See also [EmotionNotifier].
+@ProviderFor(EmotionNotifier)
+final emotionNotifierProvider = NotifierProvider<EmotionNotifier, int>.internal(
+  EmotionNotifier.new,
+  name: r'emotionNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$gptChatsNotifierHash,
+      : _$emotionNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$GptChatsNotifier = Notifier<List<GPTChat>>;
+typedef _$EmotionNotifier = Notifier<int>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
