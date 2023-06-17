@@ -12,9 +12,9 @@
         </intent>
     </queries>
     <application
-        android:label="hakkason1"
+        android:label="ずんだタイムズ"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
